@@ -2,53 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Slot Machine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COMP2068_TypeScriptDemo</title>
     <!-- CSS Section -->
     <link href="css/main.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
-        <h1>Slot Machine</h1>
-        <div>
-            <h2>Player Statistics</h2>
-            <ul id="playerStats">
-                <li id="jackpot">Jackpot: 500</li>
-                <li id="playerMoney">Player Money: 1000</li>
-                <li id="playerTurn">Turn: 0</li>
-                <li id="playerWins">Wins: 0</li>
-                <li id="playerLosses">Losses: 0</li>
-                <li id="playerWinRatio">Win Ratio: 0%</li>
-            </ul>
-        </div>
-
-        <div id="betEntry">
-
-            <p>Place Your Bet Here</p>
-            <input id="playerBet" name="points" value="10">
-        </div>
-
-
-        <button id="spinButton"><img src="img/spinButton.fw.png"/></button>
-        <button id="resetButton"><img src="img/resetButton.fw.png"/></button>
-        <button id="powerButton"><img src="img/power.fw.png"/></button>
-        
-    </div>
-
-    <div id="result">
-        <h2>Spin Result</h2>
-            <p class="inner">
-                <img src="img\Seven.png" />
-                <img src="img\Seven.png" />
-                <img src="img\Seven.png" />
-            </p> 
-    </div>
-    <div id="winOrLose">
-        <p></p>
-    </div>
+    <canvas id="canvas" width="700" height="407"></canvas>
 
 
     <!-- JavaScript Section -->
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <script src="scripts/jquery-2.1.1.min.js"></script>
+    <script src="scripts/lib/easeljs-0.7.1.min.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>

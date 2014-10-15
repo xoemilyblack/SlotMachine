@@ -1,8 +1,13 @@
 ﻿ul#playerStats {
-    list-style-type: none;
-    padding: 0;
-    margin: 5px;
+    text-align:center;
+    text-decoration:none;
+    list-style-type:none;
 }
 
+div#content {
+    text-align:center;
+}
 
-
+#canvas {
+   border: solid black 1px;
+}
