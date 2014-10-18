@@ -72,6 +72,7 @@
     <Content Include="images\powerButton.fw.png" />
     <Content Include="images\resetButton.fw.png" />
     <Content Include="images\Seven.png" />
+    <Content Include="images\slot-machine.jpg" />
     <Content Include="images\slot-machine.png" />
     <Content Include="images\spinButton.fw.png" />
     <Content Include="scripts\app.js.map" />

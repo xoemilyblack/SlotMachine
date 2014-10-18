@@ -1,4 +1,8 @@
-﻿/// <reference path="jquery.js" />
+﻿/**
+Author: Emily Black
+File Desc: Main javascript file for images and functions
+**/
+/// <reference path="jquery.js" />
 var stage;
 var spin1;
 var spin2;
@@ -70,78 +74,59 @@ function drawSlotMachine() {
     slotMachine.x = 0;
     slotMachine.y = 0;
 
-    reel[0].x = 58;
-    reel[0].y = 134;
+    reel[0].x = 117;
+    reel[0].y = 240;
 
-    reel[1].x = 163;
-    reel[1].y = 134;
+    reel[1].x = 251;
+    reel[1].y = 240;
 
-    reel[2].x = 267;
-    reel[2].y = 134;
+    reel[2].x = 391;
+    reel[2].y = 240;
 
     powerButton = new createjs.Bitmap("images/powerButton.fw.png");
-    powerButton.x = 41;
-    powerButton.y = 254;
+    powerButton.x = 78;
+    powerButton.y = 79;
    
     spinButton = new createjs.Bitmap("images/spinButton.fw.png");
-    spinButton.x = 310;
-    spinButton.y = 340;
+    spinButton.x = 483;
+    spinButton.y = 500;
 
     bet = new createjs.Bitmap("images/bet.png");
-    bet.x = 40;
-    bet.y = 345;
+    bet.x = 133;
+    bet.y = 500;
 
     bet5 = new createjs.Bitmap("images/bet5.fw.png");
-    bet5.x = 100;
-    bet5.y = 345;
+    bet5.x = 256;
+    bet5.y = 500;
 
     bet10 = new createjs.Bitmap("images/bet10.fw.png");
-    bet10.x = 160;
-    bet10.y = 345;
+    bet10.x = 375;
+    bet10.y = 500;
 
     reset = new createjs.Bitmap("images/resetButton.fw.png");
-    reset.x = 240;
-    reset.y = 345;
+    reset.x = 27;
+    reset.y = 505;
 
-    var title = new createjs.Text("Player Statistics", "25px Arial", "black");
-    title.x = 480;
-    title.y = 25;
+    money = new createjs.Text(playerMoney, "20px Arial", "red");
+    money.x = 440;
+    money.y = 457;
 
-    money = new createjs.Text("Player Money: " + playerMoney, "20px Arial", "black");
-    money.x = 450;
-    money.y = 110;
+    jackpotMoney = new createjs.Text(jackpot, "20px Arial", "red");
+    jackpotMoney.x = 257;
+    jackpotMoney.y = 142;
 
-    jackpotMoney = new createjs.Text("Jackpot: " + jackpot, "20px Arial", "black");
-    jackpotMoney.x = 450;
-    jackpotMoney.y = 90;
 
-    playerTurn = new createjs.Text("Player Turns: " + turn, "20px Arial", "black");
-    playerTurn.x = 450;
-    playerTurn.y = 130;
+    win = new createjs.Text(winnings, "20px Arial", "red");
+    win.x = 280;
+    win.y = 457;
 
-    wins = new createjs.Text("Wins: " + winNumber, "20px Arial", "black");
-    wins.x = 450;
-    wins.y = 150;
-
-    loses = new createjs.Text("Losses: " + lossNumber, "20px Arial", "black");
-    loses.x = 450;
-    loses.y = 170;
-
-    ratio = new createjs.Text("Win Ratio: " + (winRatio * 100).toFixed(2), "20px Arial", "black");
-    ratio.x = 450;
-    ratio.y = 190;
-
-    win = new createjs.Text("Winnings: " + winnings, "20px Arial", "black");
-    win.x = 450;
-    win.y = 210;
-
-    betAmount = new createjs.Text("Credits: " + bets, "20px Arial", "black");
-    betAmount.x = 450;
-    betAmount.y = 230;
+    betAmount = new createjs.Text(bets, "20px Arial", "red");
+    betAmount.x = 107;
+    betAmount.y = 458;
 
     stage.enableMouseOver();
     
-    stage.addChild(slotMachine, spinButton, reset, money, title, jackpotMoney, playerTurn, bet, bet5, bet10, betAmount, wins, loses, ratio, win, powerButton);
+    stage.addChild(slotMachine, spinButton, reset, money, jackpotMoney, bet, bet5, bet10, betAmount,  win, powerButton);
     stage.addChild(reel[0], reel[1], reel[2]);
 
     spinButton.addEventListener("click", clickHandler);
@@ -157,6 +142,15 @@ function drawSlotMachine() {
     reset.addEventListener("click", resetHandler);
     reset.addEventListener("mouseover", resetHover);
     reset.addEventListener("mouseout", resetOutHover);
+
+    powerButton.addEventListener("click", powerOff);
+}
+
+function powerOff() {
+    if (confirm("Quit the game?")) {
+        window.close();
+
+    }
 }
 
 function spinHover() {
@@ -173,15 +167,12 @@ function resetOutHover() {
 }
 /* Utility function to show Player Stats */
 function showPlayerStats() {
-
-    winRatio = winNumber / turn;
-    jackpotMoney.text = "Jackpot: " + jackpot;
-    money.text = "Player Money: " + playerMoney;
-    betAmount.text = "Credits: " + bets;
-    playerTurn.text = "Player Turns: " + turn;
-    wins.text = "Wins: " + winNumber;
-    loses.text = "Losses: " + lossNumber;
-    ratio.text = "Win Ratio: " + (winRatio * 100).toFixed(2) + "%";
+ 
+    jackpotMoney.text = jackpot;
+    money.text = playerMoney;
+    betAmount.text = bets;
+    
+   
     stage.update();
 }
 
@@ -227,7 +218,7 @@ function checkJackPot() {
 /* Utility function to show a win message and increase player money */
 function showWinMessage() {
     playerMoney += winnings;
-    win.text = "You Won: $" + winnings;
+    win.text = winnings;
     resetFruitTally();
     checkJackPot();
 }
@@ -235,7 +226,7 @@ function showWinMessage() {
 /* Utility function to show a loss message and reduce player money */
 function showLossMessage() {
     playerMoney -= playerBet;
-    win.text = "You Lost!";
+    win.text = 0;
     resetFruitTally();
     jackpot += parseInt(playerBet);
     stage.update();
@@ -377,7 +368,6 @@ function resetHandler() {
 function betHandler() {
     playerBet = 1;
     bets += 1;
-    playerMoney = playerMoney - playerBet;
     showPlayerStats();
 
 }
@@ -385,14 +375,12 @@ function betHandler() {
 function bet5Handler() {
     playerBet = 5;
     bets += 5;
-    playerMoney = playerMoney - playerBet;
     showPlayerStats();
    
 }
 function bet10Handler() {
     playerBet = 10;
     bets += 10;
-    playerMoney = playerMoney - playerBet;
     showPlayerStats(); 
 }
 
@@ -420,7 +408,7 @@ function clickHandler() {
         }
         else if (playerBet <= playerMoney) {
             spinResult = Reels();
-            bets = bets - 1;
+            bets = bets - playerBet;
             determineWinnings();
             turn++;
             showPlayerStats();
@@ -432,7 +420,5 @@ function clickHandler() {
         }
     }
 }
-
-
 
 init();
