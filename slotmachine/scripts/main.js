@@ -3,10 +3,13 @@ Author: Emily Black
 File Desc: Main javascript file for images and functions
 **/
 /// <reference path="jquery.js" />
+//stage
 var stage;
+//reels
 var spin1;
 var spin2;
 var spin3;
+//images
 var bananaImg = new Image();
 bananaImg.src = "images/Banana.png";
 var cherryImg = new Image();
@@ -23,6 +26,7 @@ var blankImg = new Image();
 blankImg.src = "images/blank.png";
 var sevenImg = new Image();
 sevenImg.src = "images/Seven.png";
+//stats and buttons
 var playerMoney = 1000;
 var winnings = 0;
 var jackpot = 5000;
@@ -57,7 +61,7 @@ var win;
 var bets = 0;
 var reel = [spin1 = new createjs.Bitmap(sevenImg), spin2 = new createjs.Bitmap(sevenImg), spin3 = new createjs.Bitmap(sevenImg)];
 
-
+//draws canvas
 function init() {
     stage = new createjs.Stage(document.getElementById("canvas"));
     createjs.Ticker.setFPS(60);
@@ -65,10 +69,11 @@ function init() {
 
     drawSlotMachine();
 }
-
+//updates stage
 function handleTick() {
     stage.update();
 }
+//adds images to canvas and positions them
 function drawSlotMachine() {
     var slotMachine = new createjs.Bitmap("images/slot-machine.png");
     slotMachine.x = 0;
@@ -129,38 +134,71 @@ function drawSlotMachine() {
     stage.addChild(slotMachine, spinButton, reset, money, jackpotMoney, bet, bet5, bet10, betAmount,  win, powerButton);
     stage.addChild(reel[0], reel[1], reel[2]);
 
+    //button events
     spinButton.addEventListener("click", clickHandler);
     spinButton.addEventListener("mouseover", spinHover);
     spinButton.addEventListener("mouseout", spinOutHover);
 
     bet.addEventListener("click", betHandler);
+    bet.addEventListener("mouseover", betOver);
+    bet.addEventListener("mouseout", betOut);
 
     bet5.addEventListener("click", bet5Handler);
+    bet5.addEventListener("mouseover", bet5Over);
+    bet5.addEventListener("mouseout", bet5Out);
 
     bet10.addEventListener("click", bet10Handler);
+    bet10.addEventListener("mouseover", bet10Over);
+    bet10.addEventListener("mouseout", bet10Out);
 
     reset.addEventListener("click", resetHandler);
     reset.addEventListener("mouseover", resetHover);
     reset.addEventListener("mouseout", resetOutHover);
 
     powerButton.addEventListener("click", powerOff);
+    powerButton.addEventListener("mouseover", powerOver);
+    powerButton.addEventListener("mouseout", powerOut);
 }
-
+//closes window
 function powerOff() {
     if (confirm("Quit the game?")) {
         window.close();
 
     }
 }
-
+//button hover
+function powerOver() {
+    powerButton.alpha = 0.7;
+}
+function powerOut() {
+    powerButton.alpha = 1.0;
+}
 function spinHover() {
-    spinButton.alpha = 0.5;
+    spinButton.alpha = 0.7;
 }
 function spinOutHover() {
     spinButton.alpha = 1.0;
 }
+function betOver() {
+    bet.alpha = 0.7;
+}
+function betOut() {
+    bet.alpha = 1.0;
+}
+function bet5Over() {
+    bet5.alpha = 0.7;
+}
+function bet5Out() {
+    bet5.alpha = 1.0;
+}
+function bet10Over() {
+    bet10.alpha = 0.7;
+}
+function bet10Out() {
+    bet10.alpha = 1.0;
+}
 function resetHover() {
-    reset.alpha = 0.5;
+    reset.alpha = 0.7;
 }
 function resetOutHover() {
     reset.alpha = 1.0;
@@ -356,7 +394,7 @@ function determineWinnings() {
     }
 
 }
-
+//resets all stats
 function resetHandler() {
     alert("reset all");
     resetAll();
@@ -364,7 +402,7 @@ function resetHandler() {
 
 
 }
-
+//bet buttons
 function betHandler() {
     playerBet = 1;
     bets += 1;
@@ -384,7 +422,7 @@ function bet10Handler() {
     showPlayerStats(); 
 }
 
-
+//spin button function
 function clickHandler() {
     
      
