@@ -426,8 +426,11 @@ function bet10Handler() {
 function clickHandler() {
     
      
-    if (bets == 0) {
-        alert("Please make a bet");
+    if (bets <= 0) {
+        
+        alert("Please make a bet/ Invalid bet");
+        
+
     } else {
       
 
@@ -453,6 +456,7 @@ function clickHandler() {
 
 
         }
+       
         else {
             alert("Please enter a valid bet amount");
         }
