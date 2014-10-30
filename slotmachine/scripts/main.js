@@ -165,10 +165,10 @@ function drawSlotMachine() {
 }
 //closes window
 function powerOff() {
-    if (confirm("Quit the game?")) {
-        window.close();
 
-    }
+    window.location.assign("http://webdesign4.georgianc.on.ca/~200261931/comp2068/Portfolio/index.html");
+
+    
 }
 //button hover
 function powerOver() {
