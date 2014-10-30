@@ -1,8 +1,11 @@
 ﻿/**
 Author: Emily Black
+File Name: main.js
 File Desc: Main javascript file for images and functions
 **/
+
 /// <reference path="jquery.js" />
+
 //stage
 var stage;
 //reels
@@ -48,6 +51,7 @@ var lossNumber = 0;
 var loses;
 var spinResult;
 var winRatio = 0;
+//fruit tally
 var grapes = 0;
 var bananas = 0;
 var oranges = 0;
@@ -58,7 +62,7 @@ var sevens = 0;
 var blanks = 0;
 var ratio;
 var win;
-var bets = 0;
+//reel array
 var reel = [spin1 = new createjs.Bitmap(sevenImg), spin2 = new createjs.Bitmap(sevenImg), spin3 = new createjs.Bitmap(sevenImg)];
 
 //draws canvas
@@ -79,14 +83,14 @@ function drawSlotMachine() {
     slotMachine.x = 0;
     slotMachine.y = 0;
 
-    reel[0].x = 117;
-    reel[0].y = 240;
+    reel[0].x = 115;
+    reel[0].y = 233;
 
-    reel[1].x = 251;
-    reel[1].y = 240;
+    reel[1].x = 247;
+    reel[1].y = 233;
 
-    reel[2].x = 391;
-    reel[2].y = 240;
+    reel[2].x = 387;
+    reel[2].y = 233;
 
     powerButton = new createjs.Bitmap("images/powerButton.fw.png");
     powerButton.x = 78;
@@ -94,40 +98,40 @@ function drawSlotMachine() {
    
     spinButton = new createjs.Bitmap("images/spinButton.fw.png");
     spinButton.x = 483;
-    spinButton.y = 500;
+    spinButton.y = 490;
 
     bet = new createjs.Bitmap("images/bet.png");
     bet.x = 133;
-    bet.y = 500;
+    bet.y = 493;
 
     bet5 = new createjs.Bitmap("images/bet5.fw.png");
     bet5.x = 256;
-    bet5.y = 500;
+    bet5.y = 493;
 
     bet10 = new createjs.Bitmap("images/bet10.fw.png");
     bet10.x = 375;
-    bet10.y = 500;
+    bet10.y = 493;
 
     reset = new createjs.Bitmap("images/resetButton.fw.png");
     reset.x = 27;
-    reset.y = 505;
+    reset.y = 500;
 
     money = new createjs.Text(playerMoney, "20px Arial", "red");
     money.x = 440;
-    money.y = 457;
+    money.y = 450;
 
     jackpotMoney = new createjs.Text(jackpot, "20px Arial", "red");
     jackpotMoney.x = 257;
-    jackpotMoney.y = 142;
+    jackpotMoney.y = 130;
 
 
     win = new createjs.Text(winnings, "20px Arial", "red");
     win.x = 280;
-    win.y = 457;
+    win.y = 450;
 
-    betAmount = new createjs.Text(bets, "20px Arial", "red");
+    betAmount = new createjs.Text(playerBet, "20px Arial", "red");
     betAmount.x = 107;
-    betAmount.y = 458;
+    betAmount.y = 450;
 
     stage.enableMouseOver();
     
@@ -208,7 +212,7 @@ function showPlayerStats() {
  
     jackpotMoney.text = jackpot;
     money.text = playerMoney;
-    betAmount.text = bets;
+    betAmount.text = playerBet;
     
    
     stage.update();
@@ -236,7 +240,7 @@ function resetAll() {
     winNumber = 0;
     lossNumber = 0;
     winRatio = 0;
-    bets = 0;
+   
 }
 
 
@@ -404,29 +408,27 @@ function resetHandler() {
 }
 //bet buttons
 function betHandler() {
-    playerBet = 1;
-    bets += 1;
+    playerBet += 1;
     showPlayerStats();
 
 }
 
 function bet5Handler() {
-    playerBet = 5;
-    bets += 5;
+    playerBet += 5;
     showPlayerStats();
    
 }
 function bet10Handler() {
-    playerBet = 10;
-    bets += 10;
+    playerBet += 10;
     showPlayerStats(); 
 }
 
 //spin button function
 function clickHandler() {
-    
+
+  
      
-    if (bets <= 0) {
+    if (playerBet <= 0) {
         
         alert("Please make a bet/ Invalid bet");
         
@@ -449,7 +451,8 @@ function clickHandler() {
         }
         else if (playerBet <= playerMoney) {
             spinResult = Reels();
-            bets = bets - playerBet;
+            playerMoney = playerMoney - playerBet;
+            playerBet = 0;
             determineWinnings();
             turn++;
             showPlayerStats();

@@ -72,10 +72,8 @@
     <Content Include="images\powerButton.fw.png" />
     <Content Include="images\resetButton.fw.png" />
     <Content Include="images\Seven.png" />
-    <Content Include="images\slot-machine.jpg" />
     <Content Include="images\slot-machine.png" />
     <Content Include="images\spinButton.fw.png" />
-    <Content Include="scripts\app.js.map" />
     <Content Include="scripts\jquery-2.1.1.min.map" />
     <Content Include="images\Thumbs.db" />
     <None Include="Web.Debug.config">
@@ -88,7 +86,6 @@
   <ItemGroup>
     <Content Include="css\main.css" />
     <Content Include="index.html" />
-    <Content Include="scripts\app.js" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />
